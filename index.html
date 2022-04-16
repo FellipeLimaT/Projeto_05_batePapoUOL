@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Bate Papo UOL</title>
+</head>
+
+<body>
+    
+    
+    <div class="container-login">
+        <div class="logo">
+            <img src="img/logo-chatUOL.png">
+        </div>
+        
+        <input type="name" placeholder="Digite seu nome" class="nome-usuario">
+        <button onclick="loginNome()">Entrar</button>
+    </div>
+    
+
+    <div class="container escondido">        
+        
+        <div class="top">
+            <img src="img/logo-chatUOL.png">
+            <ion-icon name="people"></ion-icon>
+        </div>
+
+        <div class="conteudo">
+           
+        </div>
+
+        <div class="footer">
+            <input type="text" placeholder="Escreva aqui ..." class="mensagem">
+            <ion-icon name="paper-plane-outline" onclick="adicionarMensagens()"></ion-icon>
+        </div>
+    </div>
+    
+    
+
+    
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
