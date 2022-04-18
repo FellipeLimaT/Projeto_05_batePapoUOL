@@ -3,7 +3,6 @@ let nome = "";
 let chat = [];
 
 
-
 function loginNome(){
     
     nome = document.querySelector(".nome-usuario").value;  
@@ -15,12 +14,11 @@ function loginNome(){
     const promiseNome = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", nomeUsuario);
     promiseNome.then(manterConectado)
     promiseNome.catch(tratarErro)
-
     
     
     if (nome !== ""){          
     
-    document.querySelector(".container-login").classList.add("escondido");
+    document.querySelector(".login").classList.add("escondido");
     document.querySelector(".container").classList.remove("escondido");
 
 
@@ -92,11 +90,11 @@ function renderizarMensagens(time, from, to, text, type){
         
         divMensagens.innerHTML += `
         <div class="box-mensagem fundo-branco"> 
-            <p class="estilo-texto-tempo">${time}</p>
-            <p class="estilo-texto-pessoa">${from}</p>
-            <p>para</p>
-            <p class="estilo-texto-pessoa">${to}:</p>
-            <p>${text}</p>
+            <h3 class="estilo-texto-tempo">${time}</h3>
+            <h2 class="estilo-texto-pessoa">${from}</h2>
+            <h4>para</h4>
+            <h2 class="estilo-texto-pessoa">${to}:</h2>
+            <h4>${text}</h4>
         </div>   
         `
     }
@@ -105,9 +103,9 @@ function renderizarMensagens(time, from, to, text, type){
     
         divMensagens.innerHTML += `
     <div class="box-mensagem fundo-cinza"> 
-        <p class="estilo-texto-tempo">${time}</p>
-        <p class="estilo-texto-pessoa">${from}</p>
-        <p>${text}</p>
+        <h3 class="estilo-texto-tempo">${time}</h3>
+        <h2>${from}</h2>
+        <h4>${text}</h4>
     </div>   
     `
     }
@@ -116,11 +114,11 @@ function renderizarMensagens(time, from, to, text, type){
         
         divMensagens.innerHTML += `
         <div class="box-mensagem fundo-rosa"> 
-            <p class="estilo-texto-tempo">${time}</p>
-            <p class="estilo-texto-pessoa">${from}</p>
-            <p>para</p>
-            <p class="estilo-texto-pessoa">${to}:</p>
-            <p>${text}</p>
+            <h3 class="estilo-texto-tempo">${time}</h3>
+            <h2 class="estilo-texto-pessoa">${from}</h2>
+            <h4>para</h4>
+            <h2 class="estilo-texto-pessoa">${to}:</h2>
+            <h4>${text}</h4>
         </div>   
         `
     }
@@ -140,7 +138,7 @@ function adicionarMensagens(){
     const promiseAddMensagens = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", novaMensagem);
     console.log(promiseAddMensagens);
 
-    document.addEventListener("keypress", function(e) {
+    document.addEventListener("keyword", function(e) {
         if(e.key === 'Enter') {    
             let btn = document.querySelector("#send");      
             btn.click();    

@@ -4,44 +4,62 @@
     box-sizing: border-box;
 }
 
-.container{
-    width: 414px;
+body{
+    width: 100%;
     height: 100%;
+    font-family: 'Roboto', sans-serif;
     display: flex;
-    flex-direction: column;   
+    justify-content: center;
+    align-items: center;
+    background-color: #F3F3F3;
 }
 
-.container-login{
-    width: 414px;
+/* Layout Login Inicial */
+
+.login{
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 100px;
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 0px;
+    z-index: 3;
 }
 
-.container-login input{
+.login input{
     width: 261px;
     height: 54px;
-    margin-bottom: 15px;
+    margin-top: 94px;
     border-radius: 4px;
-    background: #FFFFFF;
     border: 1px solid #D7D7D7;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    text-align: center;
+    outline: none;
+    background: #FFFFFF;
+    text-align: center; 
+    font-size: 18px;    
+    font-weight: 400;      
 }
 
-.container-login button{
+.button{
     width: 109px;
     height: 45px;
-    background: #E7E7E7;
+    margin-top: 15px;
     border-radius: 9px;
-    font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;   
-    text-align: center;
     border-color: #FFFFFF;
+    background: #E7E7E7; 
+    text-align: center;   
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    color: #696969;       
+}
+
+.button:hover{
+    cursor: pointer;
 }
 
 .logo{
@@ -49,8 +67,6 @@
     height: 100px;
     display: flex;
     justify-content: center;
-    margin-top: 100px;
-    margin-bottom: 94px;
 }
 
 .logo img{
@@ -58,8 +74,19 @@
     height: 100px;
 }
 
+/* Fim Layout Login Inicial */
+
+/* Inicio Layout Chat */
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;   
+}
+
 .top{
-    width: 414px;
+    width: 100%;
     height: 80px;
     background-color: #FFFFFF;
     display: flex;
@@ -68,51 +95,47 @@
     position: fixed;
     top: 0px;
     left: 0px;
+    padding: 0 22px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
     z-index: 1;
 }
 
 .top img{
-    width: 100px;
-    height: 53px;
-    padding-left: 22px;
+    width: 72px;
 }
 
 .top ion-icon{
-    width: 50px;
-    height: 40px;
-    padding-right: 22px;
+    font-size: 45px;
+}
+
+.top ion-icon:hover{
+    cursor: pointer;
 }
 
 .conteudo{
     width: 100%;
     height: 100%;
-    padding: 105px 0px;
-    background-color: #F3F3F3;
+    padding: 105px 15px;    
     display: flex;
     flex-direction: column;    
 }
 
 .box-mensagem{
     width: 100%;
-    height: 40px;    
+    min-height: 40px;    
     display: flex;
-    word-wrap: break-word;
     flex-wrap: wrap;
+    word-break: break-all;    
     align-items: center;
-    padding: 0 8px;
+    padding: 8px;
     font-size: 14px;
-    font-family: 'Roboto', sans-serif;
     margin-bottom: 4px;
     border-radius: 2px;
-}
-
-.box-mensagem p{
-    margin-right: 4px;    
+    line-height: 18px;
 }
 
 .fundo-cinza{
-    background-color: #AAAAAA;
+    background-color: #AAAAAA;    
 }
 
 .fundo-rosa{
@@ -123,17 +146,29 @@
     background-color: #FFFFFF;
 }
 
-.estilo-texto-tempo{
+h3{
     color: grey;
+    margin-right: 5px; 
 }
 
-.estilo-texto-pessoa{
+h2{
     font-weight: 700;
     color: #000000;
+    margin-right: 5px; 
 }
 
+h4{
+    font-weight: 400;
+    color: #000000;  
+    margin-right: 5px; 
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+ }
+
 .footer{
-    width: 414px;
+    width: 100%;
     height: 80px;
     background-color: #FFFFFF;
     display: flex;
@@ -142,26 +177,31 @@
     position: fixed;
     bottom: 0px;
     left: 0px;
+    padding: 0 22px;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .footer input{
-    padding-left: 17px;
+    width: 100%;
+    padding-left: 15px;
+    margin-right: 25px;
     border: none;
-    font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;    
+    outline: none;       
 }
 
-input:placeholder-shown{
-    font-style: italic;
-    color: #000000;
+.footer ::-webkit-input-placeholder{
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic; 
+    color: #000000;    
 }
 
 .footer ion-icon{
-    width: 30px;
-    height: 30px;
-    padding-right: 22px;
+    font-size: 30px;
+}
+
+.footer ion-icon:hover{
+    cursor: pointer;
 }
 
 .escondido {
