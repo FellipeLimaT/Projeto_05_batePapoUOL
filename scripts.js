@@ -2,7 +2,20 @@
 let nome = "";
 let chat = [];
 
+document.addEventListener("keypress", function(e) {
+    if(e.key === 'Enter') {    
+        let btn = document.querySelector("#send");      
+        btn.click();    
+    }
+});
 
+function rolarFinal(){    
+    let element = document.getElementById("conteudo");
+    element.scrollIntoView();
+    element.scrollIntoView(false);
+    element.scrollIntoView({block: "end"});
+    element.scrollIntoView({block: "end", behavior: "smooth"});
+}
 
 //Botao Entrar na pagina Login//
 
@@ -30,6 +43,8 @@ function loginNome(){
 function carregarChat(){
     document.querySelector(".login-loading").classList.add("escondido");
     document.querySelector(".container").classList.remove("escondido");
+    
+    rolarFinal();
 }
 
 function tratarErro(error){
@@ -49,7 +64,7 @@ function manterConectado(){
     console.log(nome);
     const promiseStatus = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nomeUsuario);    
     promiseStatus.then();
-    promiseStatus.catch(tratarErro);
+    promiseStatus.catch();
     console.log("Você está online");
 }
  
@@ -59,23 +74,23 @@ function pegarMensagens(){
     
     const promiseMensagens = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
     console.log(promiseMensagens);
-    promiseMensagens.then(carregarDados);    
-}
+    promiseMensagens.then(response => {
+        console.log(response.data)
+        chat = response.data;
 
-function carregarDados(response){
-    console.log(response.data)
-    chat = response.data;
+        for(let i = 0; i < chat.length; i++){
+        const time = response.data[i].time;
+        const from = response.data[i].from;
+        const to = response.data[i].to;
+        const text = response.data[i].text;
+        const type = response.data[i].type;
+        
+        renderizarMensagens(time, from, to, text, type);
+        }
+    });    
+}    
 
-    for(let i = 0; i < chat.length; i++){
-    const time = response.data[i].time;
-    const from = response.data[i].from;
-    const to = response.data[i].to;
-    const text = response.data[i].text;
-    const type = response.data[i].type;
-    
-    renderizarMensagens(time, from, to, text, type);
-    }    
-}
+
 
 
 function renderizarMensagens(time, from, to, text, type){
@@ -116,7 +131,11 @@ function renderizarMensagens(time, from, to, text, type){
             <h4>${text}</h4>
         </div>   
         `
-    }    
+    }  
+    
+    
+    rolarFinal();
+    
    
 }
 
@@ -135,8 +154,6 @@ function adicionarMensagens(){
     
     console.log(promiseAddMensagens);
     document.querySelector(".mensagem").value = "";
-    
-    enter();
 }
   
 function refreshChat(){
@@ -145,25 +162,10 @@ function refreshChat(){
     pegarMensagens();
 }
 
-function enter(){
-    document.addEventListener("keypress", function(e) {
-        if(e.key === 'Enter') {    
-            let btn = document.querySelector("#send");      
-            btn.click();    
-        }
-    });
-}
 
-function rolarFinal(){
-    let ultimaMensagem = document.querySelector(".mensagem");
-    ultimaMensagem.scrollIntoView();
-}
 
-function apagarMensagensAntigas(){
-    let divMensagens = document.querySelector(".conteudo");
-    divMensagens.innerHTML = "";
-}
-/* setInterval(refreshChat, 5000) */
+
+//setInterval(refreshChat, 5000);
 
 
   
