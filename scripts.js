@@ -3,67 +3,63 @@ let nome = "";
 let chat = [];
 
 
+
+//Botao Entrar na pagina Login//
+
 function loginNome(){
     
     nome = document.querySelector(".nome-usuario").value;  
 
     const nomeUsuario = {
         name: nome
-    }
-    
+    }    
     const promiseNome = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", nomeUsuario);
     promiseNome.then(manterConectado)
-    promiseNome.catch(tratarErro)
+    promiseNome.catch(tratarErro)    
     
-    
-    if (nome !== ""){          
-    
+    if (nome !== ""){  
     document.querySelector(".login").classList.add("escondido");
-    document.querySelector(".container").classList.remove("escondido");
-
-
+    document.querySelector(".login-loading").classList.remove("escondido");
+    setTimeout(carregarChat, 3000); 
     setInterval(manterConectado, 4000)
-
     }else{
         alert("Insira um nome para entrar!")
-    }  
-    
+    }      
 }
 
+function carregarChat(){
+    document.querySelector(".login-loading").classList.add("escondido");
+    document.querySelector(".container").classList.remove("escondido");
+}
 
 function tratarErro(error){
     console.log("Status code: " + error.response.status);
     console.log("Mensagem de erro: " + error.response.data);
+    
     if(error.response.status === 400){
-        alert("Esse nome ja existe, escolha outro para conseguir entrar!");        
-    }
-    window.location.reload();
+        window.location.reload();
+        alert("Esse nome já esta sendo usado, escolha outro para conseguir entrar!");        
+    }    
 }
 
-
-
-function manterConectado(){
-    
+function manterConectado(){    
     const nomeUsuario = {
         name: nome
     }
-    console.log(nome)
+    console.log(nome);
     const promiseStatus = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nomeUsuario);    
-    promiseStatus.then()
-    promiseStatus.catch(tratarErro)
-    console.log("Você está online")
-    
-
+    promiseStatus.then();
+    promiseStatus.catch(tratarErro);
+    console.log("Você está online");
 }
  
-
 pegarMensagens();
 
 function pegarMensagens(){
+    
     const promiseMensagens = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
     console.log(promiseMensagens);
-    promiseMensagens.then(carregarDados);
-
+    promiseMensagens.then(carregarDados);    
 }
 
 function carregarDados(response){
@@ -76,15 +72,14 @@ function carregarDados(response){
     const to = response.data[i].to;
     const text = response.data[i].text;
     const type = response.data[i].type;
-    renderizarMensagens(time, from, to, text, type);
-    }
     
+    renderizarMensagens(time, from, to, text, type);
+    }    
 }
 
 
 function renderizarMensagens(time, from, to, text, type){
-    let divMensagens = document.querySelector(".conteudo");
-      
+    let divMensagens = document.querySelector(".conteudo"); 
 
     if(type === "message"){
         
@@ -121,12 +116,12 @@ function renderizarMensagens(time, from, to, text, type){
             <h4>${text}</h4>
         </div>   
         `
-    }
-    
+    }    
+   
 }
 
 function adicionarMensagens(){
-    const mensagemDigitada = document.querySelector(".mensagem").value;
+    let mensagemDigitada = document.querySelector(".mensagem").value;
 
     const novaMensagem = {
         from: nome,
@@ -136,16 +131,12 @@ function adicionarMensagens(){
     }
 
     const promiseAddMensagens = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", novaMensagem);
-    console.log(promiseAddMensagens);
-
-    document.addEventListener("keyword", function(e) {
-        if(e.key === 'Enter') {    
-            let btn = document.querySelector("#send");      
-            btn.click();    
-        }
-    });
+    promiseAddMensagens.then(refreshChat); 
     
-    refreshChat();
+    console.log(promiseAddMensagens);
+    document.querySelector(".mensagem").value = "";
+    
+    enter();
 }
   
 function refreshChat(){
@@ -154,6 +145,24 @@ function refreshChat(){
     pegarMensagens();
 }
 
+function enter(){
+    document.addEventListener("keypress", function(e) {
+        if(e.key === 'Enter') {    
+            let btn = document.querySelector("#send");      
+            btn.click();    
+        }
+    });
+}
+
+function rolarFinal(){
+    let ultimaMensagem = document.querySelector(".mensagem");
+    ultimaMensagem.scrollIntoView();
+}
+
+function apagarMensagensAntigas(){
+    let divMensagens = document.querySelector(".conteudo");
+    divMensagens.innerHTML = "";
+}
 /* setInterval(refreshChat, 5000) */
 
 

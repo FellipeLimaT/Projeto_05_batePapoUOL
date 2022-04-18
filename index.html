@@ -15,11 +15,23 @@
         <div class="login">
             <div class="logo">
                 <img src="img/logo-chatUOL.png">
-            </div>
-            
+            </div>            
             <input type="text" placeholder="Digite seu nome" class="nome-usuario">
             <div class="button" onclick="loginNome()">Entrar</div>
         </div>
+
+        <div class="login-loading escondido">
+            <div class="logo">
+                <img src="img/logo-chatUOL.png">
+            </div>            
+            <div class="loading">
+                <img src="img/loading.png">
+                <p>Carregando ...</p>
+            </div>
+        </div>
+
+
+        
         
 
         <div class="container escondido">        
@@ -34,7 +46,7 @@
             </div>
 
             <div class="footer">
-                <input type="text" placeholder="Escreva aqui ..." class="mensagem">
+                <input type="text" placeholder="Escreva aqui ..." class="mensagem" onkeypress="enter()">
                 <ion-icon id="send" name="paper-plane-outline" onclick="adicionarMensagens()"></ion-icon>
             </div>
         </div>
